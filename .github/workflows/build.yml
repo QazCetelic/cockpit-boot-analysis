@@ -31,7 +31,7 @@ jobs:
         run: tar -czvf boot-analysis-plugin.tar.gz boot-analysis/
 
       - name: Upload artifact
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: boot-analysis-plugin
           path: boot-analysis-plugin.tar.gz
