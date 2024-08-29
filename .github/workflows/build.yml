@@ -24,8 +24,11 @@ jobs:
       - name: Run make dist
         run: make dist
 
+      - name: Move dist directory
+        run: mv dist/ boot-analysis/
+
       - name: Compress dist directory
-        run: tar -czvf boot-analysis-plugin.tar.gz dist/
+        run: tar -czvf boot-analysis-plugin.tar.gz boot-analysis/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
