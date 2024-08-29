@@ -6,6 +6,12 @@ Plugin that shows information about system / userspace startup in a graph.
 
 It was originally intended to be added as a feature to cockpit itself, but the original PR has been open since October 2023, so I've decided to turn it into a plugin instead.
 
+## Installation
+1. Download the latest build from the actions page.
+2. Extract the `.tar.gz` archive inside (GitHub archives it twice for some reason).
+3. Take the `boot-analysis` folder from the `.tar.gz` archive and put it in `/usr/local/share/cockpit/`.
+4. Press F5 to refresh the cockpit page.
+
 ## Development setup
 
 1. Installing dependencies
