@@ -18,6 +18,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y make gettext nodejs npm
 
+      - name: Install JS dependencies
+        run: npm i --legacy-peer-deps
+
       - name: Run make dist
         run: make dist
 
