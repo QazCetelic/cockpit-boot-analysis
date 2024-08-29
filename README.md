@@ -2,6 +2,9 @@
 
 Plugin that shows information about system / userspace startup in a graph.
 
+![image](https://github.com/user-attachments/assets/b8d66778-53e9-485e-be6d-a4d00f96c9fa)
+
+
 ## Development setup
 
 1. Installing dependencies
