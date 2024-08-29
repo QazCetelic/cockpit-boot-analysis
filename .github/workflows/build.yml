@@ -1,0 +1,31 @@
+name: Build and Publish Artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make gettext nodejs npm
+
+      - name: Run make dist
+        run: make dist
+
+      - name: Compress dist directory
+        run: tar -czvf boot-analysis-plugin.tar.gz dist/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: boot-analysis-plugin
+          path: boot-analysis-plugin.tar.gz
