@@ -2,7 +2,6 @@ name: cockpit-lib-update
 on:
   schedule:
     - cron: '0 2 * * 4'
-  # can be run manually on https://github.com/cockpit-project/starter-kit/actions
   workflow_dispatch:
 jobs:
   cockpit-lib-update:
@@ -16,10 +15,10 @@ jobs:
           sudo apt update
           sudo apt install -y make
 
-      - name: Set up configuration and secrets
+      - name: Set up git configuration
         run: |
-          printf '[user]\n\tname = Cockpit Project\n\temail=cockpituous@gmail.com\n' > ~/.gitconfig
-          echo '${{ secrets.GITHUB_TOKEN }}' > ~/.config/github-token
+          git config --global user.name "Cockpit Boot Analysis"
+          git config --global user.email "cockpit@example.org"
 
       - name: Clone repository
         uses: actions/checkout@v4
@@ -28,3 +27,13 @@ jobs:
         run: |
           make bots
           bots/cockpit-lib-update
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update cockpit libs
+          branch: cockpit-lib-update-branch
+          title: 'Update cockpit libraries'
+          body: 'This PR updates the cockpit libraries.'
+          labels: update, cockpit
