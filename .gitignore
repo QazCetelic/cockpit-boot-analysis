@@ -19,7 +19,6 @@
 /cockpit-*.tar.xz
 /cockpit-navigator.spec
 /dist/
-/package-lock.json
 /pkg/
 /node_modules/
 /tmp/
