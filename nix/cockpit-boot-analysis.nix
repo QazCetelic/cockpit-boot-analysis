@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
+  cockpitSource = pkgs.fetchgit {
+    url = "https://github.com/cockpit-project/cockpit.git";
+    rev = "b9e161f26348265b57ac1b9fb2bf44147fb5b55c";
+    hash = "sha256-J9WxNksRYDL9/HPq5OrBguRIZKLD0epVlAs90LhfCew=";
+  };
+
   package = pkgs.buildNpmPackage {
     pname = "cockpit-boot-analysis";
     version = "unstable";
@@ -15,7 +21,7 @@ let
     postPatch = ''
       patchShebangs build.js
       mkdir -p pkg
-      cp -r ${pkgs.cockpit.src}/pkg/lib pkg/lib
+      cp -r ${cockpitSource}/pkg/lib pkg/lib
     '';
 
     installPhase = ''
