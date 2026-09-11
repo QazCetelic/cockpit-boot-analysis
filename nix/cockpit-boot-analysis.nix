@@ -14,9 +14,6 @@ let
 
     postPatch = ''
       patchShebangs build.js
-    '';
-
-    preBuild = ''
       mkdir -p pkg
       cp -r ${pkgs.cockpit.src}/pkg/lib pkg/lib
     '';
