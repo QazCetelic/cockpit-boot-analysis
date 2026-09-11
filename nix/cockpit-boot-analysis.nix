@@ -8,8 +8,13 @@ let
     src = ../.;
 
     npmDepsHash = "sha256-sG+D9uFBnQAzRON//DNryGGgFQQA3U4fBmiu/gWLFdY=";
+    npmFlags = [ "--legacy-peer-deps" ];
 
     nativeBuildInputs = [ pkgs.gettext ];
+
+    postPatch = ''
+      patchShebangs build.js
+    '';
 
     preBuild = ''
       mkdir -p pkg
