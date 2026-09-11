@@ -17,6 +17,15 @@ It was originally intended to be added as a feature to cockpit itself, but the o
 1. Installing dependencies
 
 <details>
+<summary>NixOS</summary>
+
+```shell
+nix-shell
+```
+
+</details>
+
+<details>
 <summary>Debian/Ubuntu</summary>
 
 ```shell
