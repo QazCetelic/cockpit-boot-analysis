@@ -24,12 +24,15 @@ import cockpit from "cockpit";
 import {
     CodeBlock,
     CodeBlockCode,
+    EmptyState,
+    EmptyStateBody,
+    EmptyStateActions,
+    EmptyStateFooter,
     List,
     ListItem,
     ListVariant,
     Spinner, ToggleGroup, ToggleGroupItem
 } from "@patternfly/react-core";
-import { EmptyStatePanel } from "cockpit-components-empty-state";
 
 const _ = cockpit.gettext;
 
@@ -135,7 +138,9 @@ function Plot({ type, onLoadingChange }: { type: "user" | "system", onLoadingCha
         );
         return (
             <div className="pf-v6-c-page__main-section">
-                <EmptyStatePanel title={_("Loading")} headingLevel="h4" paragraph={paragraph} />
+                <EmptyState headingLevel="h4" titleText={_("Loading")} icon={Spinner}>
+                    <EmptyStateBody>{paragraph}</EmptyStateBody>
+                </EmptyState>
             </div>
         );
     } else if (svg === null) {
@@ -151,7 +156,12 @@ function Plot({ type, onLoadingChange }: { type: "user" | "system", onLoadingCha
         );
         return (
             <div className="pf-v6-c-page__main-section">
-                <EmptyStatePanel title={_("Failure")} headingLevel="h4" paragraph={paragraph} secondary={secondary} />
+                <EmptyState headingLevel="h4" titleText={_("Failure")}>
+                    <EmptyStateBody>{paragraph}</EmptyStateBody>
+                    <EmptyStateFooter>
+                        <EmptyStateActions>{secondary}</EmptyStateActions>
+                    </EmptyStateFooter>
+                </EmptyState>
             </div>
         );
     } else {
