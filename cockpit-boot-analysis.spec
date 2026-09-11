@@ -27,25 +27,25 @@ BuildRequires: libappstream-glib-devel
 
 Requires: cockpit-bridge
 
-Provides: bundled(npm(@patternfly/patternfly)) = 5.4.0
-Provides: bundled(npm(@patternfly/react-core)) = 5.4.0
-Provides: bundled(npm(@patternfly/react-icons)) = 5.4.0
-Provides: bundled(npm(@patternfly/react-styles)) = 5.4.0
-Provides: bundled(npm(@patternfly/react-tokens)) = 5.4.0
-Provides: bundled(npm(attr-accept)) = 2.2.2
-Provides: bundled(npm(file-selector)) = 0.6.0
-Provides: bundled(npm(focus-trap)) = 7.5.4
+Provides: bundled(npm(attr-accept)) = 2.2.4
+Provides: bundled(npm(file-selector)) = 2.1.0
+Provides: bundled(npm(focus-trap)) = 7.6.6
 Provides: bundled(npm(js-tokens)) = 4.0.0
 Provides: bundled(npm(loose-envify)) = 1.4.0
 Provides: bundled(npm(object-assign)) = 4.1.1
+Provides: bundled(npm(@patternfly/patternfly)) = 6.6.1
+Provides: bundled(npm(@patternfly/react-core)) = 6.6.1
+Provides: bundled(npm(@patternfly/react-icons)) = 6.6.1
+Provides: bundled(npm(@patternfly/react-styles)) = 6.6.1
+Provides: bundled(npm(@patternfly/react-tokens)) = 6.6.1
 Provides: bundled(npm(prop-types)) = 15.8.1
-Provides: bundled(npm(react-dom)) = 18.3.1
-Provides: bundled(npm(react-dropzone)) = 14.2.3
-Provides: bundled(npm(react-is)) = 16.13.1
 Provides: bundled(npm(react)) = 18.3.1
+Provides: bundled(npm(react-dom)) = 18.3.1
+Provides: bundled(npm(react-dropzone)) = 14.3.5
+Provides: bundled(npm(react-is)) = 16.13.1
 Provides: bundled(npm(scheduler)) = 0.23.2
-Provides: bundled(npm(tabbable)) = 6.2.0
-Provides: bundled(npm(tslib)) = 2.7.0
+Provides: bundled(npm(tabbable)) = 6.5.0
+Provides: bundled(npm(tslib)) = 2.8.1
 
 %description
 Cockpit Starter Kit Example Module
