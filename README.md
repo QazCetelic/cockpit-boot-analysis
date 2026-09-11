@@ -7,6 +7,28 @@ Plugin that shows information about system / userspace startup in a graph.
 It was originally intended to be added as a feature to cockpit itself, but the original PR has been open since October 2023, so I've decided to turn it into a plugin instead.
 
 ## Installation
+
+### NixOS
+
+Import the module in `configuration.nix`, enable Cockpit, and rebuild:
+
+```nix
+{
+	imports = [
+		(import (builtins.fetchGit {
+			url = "https://github.com/QazCetelic/cockpit-boot-analysis.git";
+			rev = "f9ddf4072c7e573a550943ad584d89c9c7227fa8";
+		}))
+	];
+
+	services.cockpit.enable = true;
+}
+```
+
+Pin `rev` to the commit you want to use. The plugin is installed automatically whenever `services.cockpit.enable` is true; it has no additional options.
+
+### Other
+
 1. Download the latest build from the actions page.
 2. Extract the `.tar.gz` archive inside (GitHub archives it twice for some reason).
 3. Take the `boot-analysis` folder from the `.tar.gz` archive and put it in `/usr/local/share/cockpit/`.
