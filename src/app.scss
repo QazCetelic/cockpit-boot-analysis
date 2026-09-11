@@ -1,4 +1,10 @@
-@use "page.scss";
+html,
+body,
+#app {
+    block-size: 100%;
+    margin: 0;
+    overflow: hidden;
+}
 
 rect {
     stroke-width: 1;
@@ -9,101 +15,112 @@ rect.background {
     fill: rgb(255 255 255);
 }
 
+.pf-v6-c-page__main-section {
+    box-sizing: border-box;
+    block-size: 100%;
+    overflow: hidden;
+    padding: var(--pf-t--global--spacer--lg);
+}
+
+.pf-v6-c-toggle-group {
+    margin-block-end: var(--pf-t--global--spacer--md);
+}
+
 .activating {
-    fill: var(--pf-v5-global--palette--green-100);
+    fill: var(--pf-t--global--color--status--success--100, #bde7b9);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--green-100);
+        background-color: var(--pf-t--global--color--status--success--100, #bde7b9);
     }
     fill-opacity: 0.7;
 }
 
 .active {
-    fill: var(--pf-v5-global--palette--blue-100);
+    fill: var(--pf-t--global--color--nonstatus--blue--100, #b9dafc);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--blue-100);
+        background-color: var(--pf-t--global--color--nonstatus--blue--100, #b9dafc);
     }
     fill-opacity: 0.7;
 }
 
 .deactivating {
-    fill: var(--pf-v5-global--palette--red-100);
+    fill: var(--pf-t--global--color--status--danger--100, #f4b9b9);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--red-100);
+        background-color: var(--pf-t--global--color--status--danger--100, #f4b9b9);
     }
     fill-opacity: 0.7;
 }
 
 .kernel {
-    fill: var(--pf-v5-global--palette--black-300);
+    fill: var(--pf-t--global--color--nonstatus--gray--300, #b8bbbe);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--black-300);
+        background-color: var(--pf-t--global--color--nonstatus--gray--300, #b8bbbe);
     }
     fill-opacity: 0.7;
 }
 
 .initrd {
-    fill: var(--pf-v5-global--palette--black-300);
+    fill: var(--pf-t--global--color--nonstatus--gray--300);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--black-300);
+        background-color: var(--pf-t--global--color--nonstatus--gray--300);
     }
     fill-opacity: 0.7;
 }
 
 .firmware {
-    fill: var(--pf-v5-global--palette--black-300);
+    fill: var(--pf-t--global--color--nonstatus--gray--300);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--black-300);
+        background-color: var(--pf-t--global--color--nonstatus--gray--300);
     }
     fill-opacity: 0.7;
 }
 
 .loader {
-    fill: var(--pf-v5-global--palette--black-300);
+    fill: var(--pf-t--global--color--nonstatus--gray--300);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--black-300);
+        background-color: var(--pf-t--global--color--nonstatus--gray--300);
     }
     fill-opacity: 0.7;
 }
 
 .userspace {
-    fill: var(--pf-v5-global--palette--black-300);
+    fill: var(--pf-t--global--color--nonstatus--gray--300);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--black-300);
+        background-color: var(--pf-t--global--color--nonstatus--gray--300);
     }
     fill-opacity: 0.7;
 }
 
 .security {
-    fill: var(--pf-v5-global--palette--orange-200);
+    fill: var(--pf-t--global--color--nonstatus--orange--200);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--orange-200);
+        background-color: var(--pf-t--global--color--nonstatus--orange--200);
     }
     fill-opacity: 0.7;
 }
 
 .generators {
-    fill: var(--pf-v5-global--palette--cyan-200);
+    fill: var(--pf-t--global--color--nonstatus--teal--200);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--cyan-200);
+        background-color: var(--pf-t--global--color--nonstatus--teal--200);
     }
     fill-opacity: 0.7;
 }
 
 .unitsload {
-    fill: var(--pf-v5-global--palette--purple-200);
+    fill: var(--pf-t--global--color--nonstatus--purple--200);
 
     &.legendColor {
-        background-color: var(--pf-v5-global--palette--purple-200);
+        background-color: var(--pf-t--global--color--nonstatus--purple--200);
     }
     fill-opacity: 0.7;
 }
@@ -162,16 +179,31 @@ text.sec {
 }
 
 .chart-container {
+    flex: 1;
+    min-block-size: 0;
     max-inline-size: 100%;
     margin-inline: 1em;
-    max-block-size: 80vh;
-    overflow: scroll;
+    overflow: auto;
+}
+
+.pf-v6-c-card {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 0;
+    max-block-size: calc(100% - 4rem);
+}
+
+.pf-v6-c-card__body {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 0;
+    overflow: hidden;
 }
 
 .chart {
     // Crop top where text was removed
     margin-block-start: -4em;
-    font-family: var(--pf-v5-global--FontFamily--text);
+    font-family: var(--pf-t--global--font--family--body);
 }
 
 .clickable-service {

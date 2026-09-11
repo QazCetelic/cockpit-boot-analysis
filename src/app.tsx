@@ -35,38 +35,46 @@ const _ = cockpit.gettext;
 
 export const Application = () => {
     const [type, setType] = useState("user" as "user" | "system");
+    const [loading, setLoading] = useState(true);
 
     return (
-        <div className="pf-v5-c-page__main-section">
+        <div className="pf-v6-c-page__main-section">
             <ToggleGroup aria-label="Select startup type">
                 <ToggleGroupItem
                     text="System startup"
                     buttonId="toggle-group-single-1"
                     isSelected={type === "system"}
+                    isDisabled={loading}
                     onChange={() => setType("system")}
                 />
                 <ToggleGroupItem
                     text="User startup"
                     buttonId="toggle-group-single-2"
                     isSelected={type === "user"}
+                    isDisabled={loading}
                     onChange={() => setType("user")}
                 />
             </ToggleGroup>
-            <Plot type={type} />
+            <Plot type={type} onLoadingChange={setLoading} />
         </div>
     );
 };
 
-function Plot({ type }: { type: "user" | "system" }) {
+function Plot({ type, onLoadingChange }: { type: "user" | "system", onLoadingChange: (loading: boolean) => void }) {
     const [svg, setSvg] = useState(undefined as unknown as HTMLElement | null);
     const [text, setText] = useState([] as string[]);
 
     useEffect(() => {
+        onLoadingChange(true);
         const cmd = (type === "user") ? ["systemd-analyze", "--user", "plot"] : ["systemd-analyze", "plot"];
         cockpit.spawn(cmd)
                 .then(svg_xml => {
                     try {
                         const doc = new DOMParser().parseFromString(svg_xml, "text/xml");
+
+                        // The SVG contains its own legacy stylesheet. Remove it so the
+                        // PatternFly 6 colors defined by this page apply consistently.
+                        doc.querySelectorAll("style").forEach(style => style.remove());
 
                         const topLevelText = doc.querySelectorAll("*:not(g) > text");
                         const topLevelTextContent: string[] = Array.from(topLevelText).map(e => {
@@ -81,9 +89,6 @@ function Plot({ type }: { type: "user" | "system" }) {
                             svgElem.style.scale = "0.5";
                             const groups = doc.querySelectorAll("g");
                             const plot = groups[0];
-                            const legend = groups[1];
-                            console.log(legend);
-                            legend.remove();
                             const textElements = [...Array.from(plot.querySelectorAll("text.left")), ...Array.from(plot.querySelectorAll("text.right"))];
                             textElements.forEach((text) => {
                                 // Sets up attributes to make it possible jump to the page of a specific service
@@ -98,16 +103,19 @@ function Plot({ type }: { type: "user" | "system" }) {
                             });
                             setSvg(doc.documentElement);
                         }
+                        onLoadingChange(false);
                     } catch {
                         setSvg(null);
                         setText([_("There was an error parsing the output of systemd-analyze")]);
+                        onLoadingChange(false);
                     }
                 })
                 .catch(() => {
                     setSvg(null);
                     setText([_("There was an error reading the output of systemd-analyze")]);
+                    onLoadingChange(false);
                 });
-    }, [type]);
+    }, [onLoadingChange, type]);
 
     const plotClicked: React.MouseEventHandler<HTMLDivElement> = (event) => {
         // The following code is safe because the event target is a div element, but TS doesn't know that
@@ -126,7 +134,7 @@ function Plot({ type }: { type: "user" | "system" }) {
             <Spinner size="xl" />
         );
         return (
-            <div className="pf-v5-c-page__main-section">
+            <div className="pf-v6-c-page__main-section">
                 <EmptyStatePanel title={_("Loading")} headingLevel="h4" paragraph={paragraph} />
             </div>
         );
@@ -142,7 +150,7 @@ function Plot({ type }: { type: "user" | "system" }) {
             </CodeBlock>
         );
         return (
-            <div className="pf-v5-c-page__main-section">
+            <div className="pf-v6-c-page__main-section">
                 <EmptyStatePanel title={_("Failure")} headingLevel="h4" paragraph={paragraph} secondary={secondary} />
             </div>
         );
